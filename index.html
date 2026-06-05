@@ -2,41 +2,62 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>WashGo Pro - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WashGo Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>.glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: white; }</style>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body class="bg-slate-900 text-white p-6">
-    <div class="max-w-md mx-auto text-center">
+<body class="bg-slate-950 text-white p-6">
+    <div id="app" class="max-w-md mx-auto text-center">
         <h1 class="text-4xl font-black text-blue-500 mb-2">WASHGO PRO</h1>
         <p class="mb-8 opacity-75">Pakar Cuci Rumah Rawang</p>
         
-        <div id="main-menu" class="space-y-3">
-            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-4 rounded-2xl text-left">✨ Basic Cleaning <br><span class="text-xs opacity-60">RM80-RM120</span></button>
-            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-4 rounded-2xl text-left">🧼 Deep Cleaning <br><span class="text-xs opacity-60">RM120-RM180</span></button>
-            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-4 rounded-2xl text-left">📦 Move In / Move Out <br><span class="text-xs opacity-60">RM150-RM250</span></button>
-            <button onclick="showDetail('Post Renovation', 250, 500)" class="glass w-full p-4 rounded-2xl text-left">🏗️ Post Renovation <br><span class="text-xs opacity-60">RM250-RM500</span></button>
+        <!-- Main Menu -->
+        <div id="main-menu" class="space-y-4">
+            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-5 rounded-2xl text-left transition hover:bg-white/10">
+                <span class="text-xl">✨</span> <span class="font-bold">Basic Cleaning</span><br>
+                <span class="text-xs opacity-60">RM80 - RM120</span>
+            </button>
+            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-5 rounded-2xl text-left transition hover:bg-white/10">
+                <span class="text-xl">🧼</span> <span class="font-bold">Deep Cleaning</span><br>
+                <span class="text-xs opacity-60">RM120 - RM180</span>
+            </button>
+            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-5 rounded-2xl text-left transition hover:bg-white/10">
+                <span class="text-xl">📦</span> <span class="font-bold">Move In / Move Out</span><br>
+                <span class="text-xs opacity-60">RM150 - RM250</span>
+            </button>
+            <button onclick="showDetail('Post Renovation', 250, 500)" class="glass w-full p-5 rounded-2xl text-left transition hover:bg-white/10">
+                <span class="text-xl">🏗️</span> <span class="font-bold">Post Renovation</span><br>
+                <span class="text-xs opacity-60">RM250 - RM500</span>
+            </button>
         </div>
 
+        <!-- Detail View -->
         <div id="detail-view" class="hidden glass p-6 rounded-2xl text-left">
             <h2 id="d-title" class="text-2xl font-bold text-blue-400 mb-4"></h2>
-            <div class="bg-yellow-500/20 p-3 rounded-lg text-sm mb-4">
-                <p class="font-bold text-yellow-500">💡 Nota Penting:</p>
-                <p>Kami sediakan tenaga profesional sahaja. Pelanggan perlu sediakan: Mop, Vakum, Penyapu & Sabun lantai. Harga lebih murah sebab barang tak bercampur!</p>
+            <div class="bg-yellow-900/30 p-4 rounded-lg text-sm mb-4 border border-yellow-700/50">
+                <p class="font-bold text-yellow-500 mb-1">💡 Nota Penting:</p>
+                <p class="opacity-90">Pihak kami hanya menyediakan tenaga kerja. Pelanggan perlu sediakan: Mop, Vakum, Penyapu & Sabun lantai. Harga lebih murah kerana barang tidak bercampur!</p>
             </div>
-            <p id="d-price" class="font-bold"></p>
+            <p id="d-price" class="font-bold text-lg mb-1"></p>
             <p id="d-profit" class="text-green-400 font-bold mb-6"></p>
-            <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-3 rounded-xl font-bold mb-4">📍 Navigasi Waze</a>
-            <button onclick="location.reload()" class="w-full opacity-50 underline">Kembali ke Menu</button>
+            <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-3 rounded-xl font-bold mb-4 hover:bg-blue-700 transition">📍 Navigasi Waze</a>
+            <button onclick="location.reload()" class="w-full opacity-50 underline text-sm">Kembali ke Menu</button>
         </div>
     </div>
+
     <script>
         function showDetail(name, min, max) {
             document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('detail-view').classList.remove('hidden');
             document.getElementById('d-title').innerText = name;
             document.getElementById('d-price').innerText = "Anggaran Harga: RM" + min + " - RM" + max;
-            document.getElementById('d-profit').innerText = "Anggaran Profit: RM" + (min*0.7).toFixed(0) + " - RM" + (max*0.7).toFixed(0);
+            // Formula Profit: Contoh 70% dari harga
+            let pMin = (min * 0.7).toFixed(0);
+            let pMax = (max * 0.7).toFixed(0);
+            document.getElementById('d-profit').innerText = "Anggaran Profit Projek: RM" + pMin + " - RM" + pMax;
         }
     </script>
 </body>
