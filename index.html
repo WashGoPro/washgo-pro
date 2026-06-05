@@ -17,17 +17,21 @@
         </div>
         
         <div id="main-menu" class="space-y-3">
-            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-5 rounded-2xl text-left transition-all active:scale-[0.98] hover:border-blue-500/30">
-                <div class="font-bold text-lg mb-0.5">✨ Basic Cleaning</div>
+            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-5 rounded-2xl text-left transition-all hover:border-blue-500/30">
+                <div class="font-bold text-lg">✨ Basic Cleaning</div>
+                <div class="text-xs opacity-50">RM80 - RM120</div>
             </button>
-            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-5 rounded-2xl text-left transition-all active:scale-[0.98] hover:border-blue-500/30">
-                <div class="font-bold text-lg mb-0.5">🧼 Deep Cleaning</div>
+            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-5 rounded-2xl text-left transition-all hover:border-blue-500/30">
+                <div class="font-bold text-lg">🧼 Deep Cleaning</div>
+                <div class="text-xs opacity-50">RM120 - RM180</div>
             </button>
-            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-5 rounded-2xl text-left transition-all active:scale-[0.98] hover:border-blue-500/30">
-                <div class="font-bold text-lg mb-0.5">📦 Move In / Move Out</div>
+            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-5 rounded-2xl text-left transition-all hover:border-blue-500/30">
+                <div class="font-bold text-lg">📦 Move In / Move Out</div>
+                <div class="text-xs opacity-50">RM150 - RM250</div>
             </button>
-            <button onclick="showDetail('Post Renovation', 250, 500)" class="glass w-full p-5 rounded-2xl text-left transition-all active:scale-[0.98] hover:border-blue-500/30">
-                <div class="font-bold text-lg mb-0.5">🏗️ Post Renovation</div>
+            <button onclick="showDetail('Post Renovation', 250, 500)" class="glass w-full p-5 rounded-2xl text-left transition-all hover:border-blue-500/30">
+                <div class="font-bold text-lg">🏗️ Post Renovation</div>
+                <div class="text-xs opacity-50">RM250 - RM500</div>
             </button>
         </div>
 
@@ -47,32 +51,15 @@
     </div>
 
     <script>
-        // FORMULA RAHSIA (Admin Mode):
-        // 1. Profit = Harga servis x 0.7
-        // 2. Jarak > 5km: Tambah RM5, > 10km: Tambah RM10
-        function calculateAdminFees(harga, jarakKM) {
-            let profit = harga * 0.7;
-            let travelCharge = 0;
-            
-            if (jarakKM > 10) { travelCharge = 10; }
-            else if (jarakKM > 5) { travelCharge = 5; }
-            
-            let totalProfit = profit + travelCharge;
-            return { profit, travelCharge, totalProfit };
-        }
-
         function showDetail(title, min, max) {
             document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('detail-view').classList.remove('hidden');
             document.getElementById('d-title').innerText = title;
             document.getElementById('d-price').innerText = "RM" + min + " - RM" + max;
             
-            // Contoh log untuk admin (Buka Console F12 untuk semak)
-            let admin = calculateAdminFees(min, 12); // Contoh customer jarak 12km
-            console.log("--- Laporan Admin (" + title + ") ---");
-            console.log("Profit Kasar: RM" + admin.profit.toFixed(0));
-            console.log("Caj Perjalanan: RM" + admin.travelCharge);
-            console.log("Total Keuntungan: RM" + admin.totalProfit.toFixed(0));
+            // Log Admin (Buka Console untuk rujukan)
+            let profit = (min * 0.7).toFixed(0);
+            console.log("Admin Log - " + title + ": Profit RM" + profit);
         }
     </script>
 </body>
