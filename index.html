@@ -1,82 +1,273 @@
+```html
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #f3f4f6; min-height: 100vh; font-family: sans-serif; }
-        .service-card { background: white; border: 1px solid #e5e7eb; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WashGo Pro</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+    background:#f3f4f6;
+}
+.hero{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+}
+</style>
 </head>
-<body class="flex flex-col items-center p-4">
 
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">WASHGO PRO</h1>
+<body>
 
-    <div class="max-w-md w-full space-y-4">
-        
-        <!-- Senarai Servis (Gaya Kad Putih) -->
-        <div onclick="showForm('Basic Cleaning', 'RM80 - RM120')" class="service-card p-3 rounded-2xl cursor-pointer flex items-center gap-4 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=200" class="w-20 h-20 rounded-xl object-cover">
-            <div>
-                <div class="font-bold text-gray-800 text-lg">Basic Cleaning</div>
-                <div class="text-gray-500">RM80 - RM120</div>
-            </div>
+<!-- HEADER -->
+<div class="hero text-white p-6 rounded-b-3xl shadow-lg">
+
+    <h1 class="text-3xl font-bold">
+        WASHGO PRO
+    </h1>
+
+    <p class="text-sm mt-2 opacity-90">
+        Servis Pembersihan Profesional
+    </p>
+
+    <div class="grid grid-cols-3 gap-3 mt-5 text-center">
+
+        <div class="bg-white/10 p-3 rounded-xl">
+            <div class="font-bold">1200+</div>
+            <div class="text-xs">Customer</div>
         </div>
 
-        <div onclick="showForm('Deep Cleaning', 'RM120 - RM180')" class="service-card p-3 rounded-2xl cursor-pointer flex items-center gap-4 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1581578751502-c639f660819f?w=200" class="w-20 h-20 rounded-xl object-cover">
-            <div>
-                <div class="font-bold text-gray-800 text-lg">Deep Cleaning</div>
-                <div class="text-gray-500">RM120 - RM180</div>
-            </div>
+        <div class="bg-white/10 p-3 rounded-xl">
+            <div class="font-bold">4.9★</div>
+            <div class="text-xs">Rating</div>
         </div>
 
-        <div onclick="showForm('Move In / Move Out', 'RM150 - RM250')" class="service-card p-3 rounded-2xl cursor-pointer flex items-center gap-4 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=200" class="w-20 h-20 rounded-xl object-cover">
-            <div>
-                <div class="font-bold text-gray-800 text-lg">Move In / Move Out</div>
-                <div class="text-gray-500">RM150 - RM250</div>
-            </div>
+        <div class="bg-white/10 p-3 rounded-xl">
+            <div class="font-bold">24/7</div>
+            <div class="text-xs">Booking</div>
         </div>
 
-        <div onclick="showForm('Post Renovation', 'RM250 - RM500')" class="service-card p-3 rounded-2xl cursor-pointer flex items-center gap-4 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a268e?w=200" class="w-20 h-20 rounded-xl object-cover">
-            <div>
-                <div class="font-bold text-gray-800 text-lg">Post Renovation</div>
-                <div class="text-gray-500">RM250 - RM500</div>
-            </div>
-        </div>
     </div>
+</div>
 
-    <!-- Borang Tempahan (Hidden) -->
-    <div id="bookingForm" class="max-w-md w-full bg-white p-6 rounded-3xl mt-6 hidden border shadow-lg">
-        <h2 id="serviceTitle" class="text-2xl font-bold text-gray-800"></h2>
-        <p id="servicePrice" class="mb-5 text-gray-600 font-medium"></p>
-        
-        <div class="bg-yellow-50 p-4 rounded-xl text-sm mb-6 border border-yellow-200 text-gray-700">
-            <p class="font-bold text-yellow-800">Nota Penting:</p>
-            Demi menjaga tahap kebersihan (hygiene) yang paling tinggi, pihak kami hanya menyediakan tenaga kerja profesional sahaja. Pelanggan diminta untuk menyediakan peralatan pembersihan seperti mop, vakum, penyapu, dan sabun pencuci lantai.
-        </div>
+<!-- SERVICES -->
+<div class="p-4">
 
-        <form class="space-y-4">
-            <input type="text" placeholder="Customer Name" class="w-full p-3 rounded-lg border border-gray-300">
-            <div class="flex gap-2">
-                <input type="text" placeholder="Phone" class="w-1/2 p-3 rounded-lg border border-gray-300">
-                <input type="time" class="w-1/2 p-3 rounded-lg border border-gray-300">
-            </div>
-            <button type="button" onclick="alert('GPS Aktif')" class="w-full bg-blue-600 text-white p-3 rounded-lg font-bold">📍 Dapatkan Lokasi</button>
-            <button class="w-full bg-gray-800 text-white py-3 rounded-lg font-bold">Submit Tempahan</button>
-        </form>
-        <button onclick="location.reload()" class="w-full mt-4 text-center text-gray-500 underline">Kembali ke Menu</button>
-    </div>
+<h2 class="font-bold text-xl mb-4">
+Pilih Servis
+</h2>
 
-    <script>
-        function showForm(title, price) {
-            document.querySelector('.max-w-md').classList.add('hidden');
-            document.getElementById('bookingForm').classList.remove('hidden');
-            document.getElementById('serviceTitle').innerText = title;
-            document.getElementById('servicePrice').innerText = "Harga: " + price;
-        }
-    </script>
+<div class="space-y-3">
+
+<div onclick="showForm('Basic Cleaning','RM80 - RM120')"
+class="bg-white rounded-2xl p-4 shadow cursor-pointer">
+
+<div class="font-bold">
+Basic Cleaning
+</div>
+
+<div class="text-gray-500">
+RM80 - RM120
+</div>
+
+</div>
+
+<div onclick="showForm('Deep Cleaning','RM120 - RM180')"
+class="bg-white rounded-2xl p-4 shadow cursor-pointer">
+
+<div class="font-bold">
+Deep Cleaning
+</div>
+
+<div class="text-gray-500">
+RM120 - RM180
+</div>
+
+</div>
+
+<div onclick="showForm('Move In / Move Out','RM150 - RM250')"
+class="bg-white rounded-2xl p-4 shadow cursor-pointer">
+
+<div class="font-bold">
+Move In / Move Out
+</div>
+
+<div class="text-gray-500">
+RM150 - RM250
+</div>
+
+</div>
+
+<div onclick="showForm('Post Renovation','RM250 - RM500')"
+class="bg-white rounded-2xl p-4 shadow cursor-pointer">
+
+<div class="font-bold">
+Post Renovation
+</div>
+
+<div class="text-gray-500">
+RM250 - RM500
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- BOOKING FORM -->
+
+<div id="bookingForm"
+class="hidden p-4">
+
+<div class="bg-white rounded-3xl p-5 shadow">
+
+<h2 id="serviceTitle"
+class="text-2xl font-bold">
+</h2>
+
+<p id="servicePrice"
+class="text-gray-500 mb-5">
+</p>
+
+<input id="name"
+type="text"
+placeholder="Nama Penuh"
+class="w-full border p-3 rounded-xl mb-3">
+
+<input id="phone"
+type="tel"
+placeholder="No Telefon"
+class="w-full border p-3 rounded-xl mb-3">
+
+<input id="address"
+type="text"
+placeholder="Alamat"
+class="w-full border p-3 rounded-xl mb-3">
+
+<input id="date"
+type="date"
+class="w-full border p-3 rounded-xl mb-3">
+
+<input id="time"
+type="time"
+class="w-full border p-3 rounded-xl mb-3">
+
+<textarea id="note"
+placeholder="Nota Tambahan"
+class="w-full border p-3 rounded-xl mb-3"></textarea>
+
+<input id="gps"
+type="text"
+placeholder="Lokasi GPS"
+class="w-full border p-3 rounded-xl mb-3">
+
+<button
+onclick="getLocation()"
+class="w-full bg-blue-600 text-white p-3 rounded-xl mb-3">
+
+📍 Dapatkan Lokasi
+
+</button>
+
+<button
+onclick="submitBooking()"
+class="w-full bg-green-600 text-white p-3 rounded-xl font-bold">
+
+TEMPAH SEKARANG
+
+</button>
+
+</div>
+</div>
+
+<script>
+
+function showForm(service,price){
+
+document.getElementById("bookingForm")
+.classList.remove("hidden");
+
+document.getElementById("serviceTitle")
+.innerText=service;
+
+document.getElementById("servicePrice")
+.innerText=price;
+
+window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+function getLocation(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+document.getElementById("gps").value=
+pos.coords.latitude + "," +
+pos.coords.longitude;
+
+});
+
+}
+
+}
+
+function submitBooking(){
+
+let service =
+document.getElementById("serviceTitle").innerText;
+
+let name =
+document.getElementById("name").value;
+
+let phone =
+document.getElementById("phone").value;
+
+let address =
+document.getElementById("address").value;
+
+let date =
+document.getElementById("date").value;
+
+let time =
+document.getElementById("time").value;
+
+let gps =
+document.getElementById("gps").value;
+
+let note =
+document.getElementById("note").value;
+
+let msg =
+`*TEMPAHAN BARU WASHGO PRO*
+
+Servis: ${service}
+
+Nama: ${name}
+
+Telefon: ${phone}
+
+Alamat: ${address}
+
+Tarikh: ${date}
+
+Masa: ${time}
+
+GPS: ${gps}
+
+Nota: ${note}`;
+
+window.open(
+"https://wa.me/60123456789?text=" +
+encodeURIComponent(msg)
+);
+
+}
+
+</script>
+
 </body>
 </html>
+```
