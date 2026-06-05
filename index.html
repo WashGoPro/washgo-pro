@@ -2,62 +2,41 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WashGo Pro - Servis Pembersihan</title>
+    <title>WashGo Pro - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; }
-    </style>
+    <style>.glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: white; }</style>
 </head>
-<body class="bg-slate-900 text-white p-4">
-    <div id="app" class="max-w-md mx-auto">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-blue-400">WASHGO PRO</h1>
-            <p class="text-sm opacity-80">Pakar Cuci Rumah Rawang</p>
+<body class="bg-slate-900 text-white p-6">
+    <div class="max-w-md mx-auto text-center">
+        <h1 class="text-4xl font-black text-blue-500 mb-2">WASHGO PRO</h1>
+        <p class="mb-8 opacity-75">Pakar Cuci Rumah Rawang</p>
+        
+        <div id="main-menu" class="space-y-3">
+            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-4 rounded-2xl text-left">✨ Basic Cleaning <br><span class="text-xs opacity-60">RM80-RM120</span></button>
+            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-4 rounded-2xl text-left">🧼 Deep Cleaning <br><span class="text-xs opacity-60">RM120-RM180</span></button>
+            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-4 rounded-2xl text-left">📦 Move In / Move Out <br><span class="text-xs opacity-60">RM150-RM250</span></button>
+            <button onclick="showDetail('Post Renovation', 250, 500)" class="glass w-full p-4 rounded-2xl text-left">🏗️ Post Renovation <br><span class="text-xs opacity-60">RM250-RM500</span></button>
         </div>
 
-        <div id="service-list" class="space-y-4">
-            <button onclick="selectService('Basic Cleaning', 80, 120, 'Cucian asas rumah yang ideal untuk penyelenggaraan rutin')" class="glass-card w-full p-4 rounded-xl text-left">
-                <h2 class="font-bold">✨ Basic Cleaning</h2>
-                <p class="text-xs opacity-70">Bermula RM80 - RM120</p>
-            </button>
-            <button onclick="selectService('Deep Cleaning', 120, 180, 'Pembersihan menyeluruh termasuk menyental kotoran degil')" class="glass-card w-full p-4 rounded-xl text-left">
-                <h2 class="font-bold">🧼 Deep Cleaning</h2>
-                <p class="text-xs opacity-70">Bermula RM120 - RM180</p>
-            </button>
-            <button onclick="selectService('Move In / Move Out', 150, 250, 'Cucian intensif sebelum masuk rumah baru atau selepas keluar rumah')" class="glass-card w-full p-4 rounded-xl text-left">
-                <h2 class="font-bold">📦 Move In / Move Out</h2>
-                <p class="text-xs opacity-70">Bermula RM150 - RM250</p>
-            </button>
-            <button onclick="selectService('Post Renovation', 250, 500, 'Pembersihan khusus untuk habuk, simen, cat, dan sisa binaan')" class="glass-card w-full p-4 rounded-xl text-left">
-                <h2 class="font-bold">🏗️ Post Renovation</h2>
-                <p class="text-xs opacity-70">Bermula RM250 - RM500</p>
-            </button>
-        </div>
-
-        <div id="detail-page" class="hidden">
-            <div class="glass-card p-6 rounded-xl">
-                <h2 id="service-title" class="text-xl font-bold mb-4 text-blue-400"></h2>
-                <div class="bg-yellow-900/30 p-4 rounded-lg mb-4 text-sm">
-                    <p class="font-bold text-yellow-500 mb-2">💡 Nota Penting:</p>
-                    <p>Polisi Penting Perkhidmatan: Pihak kami hanya menyediakan tenaga kerja profesional. Pelanggan diminta sediakan: 1. Peralatan (Mop, Vakum, Penyapu), 2. Bahan (Sabun lantai).</p>
-                    <p class="mt-2 text-xs opacity-80 italic">Kelebihan: Barang milik anda, harga servis jauh lebih murah!</p>
-                </div>
-                <p id="price-range" class="mb-2 font-semibold"></p>
-                <p id="profit-calc" class="mb-4 text-green-400 font-bold"></p>
-                <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-2 rounded-lg mb-4 font-bold">📍 Navigasi Waze</a>
-                <button onclick="location.reload()" class="w-full text-sm opacity-50 underline">Kembali ke Menu</button>
+        <div id="detail-view" class="hidden glass p-6 rounded-2xl text-left">
+            <h2 id="d-title" class="text-2xl font-bold text-blue-400 mb-4"></h2>
+            <div class="bg-yellow-500/20 p-3 rounded-lg text-sm mb-4">
+                <p class="font-bold text-yellow-500">💡 Nota Penting:</p>
+                <p>Kami sediakan tenaga profesional sahaja. Pelanggan perlu sediakan: Mop, Vakum, Penyapu & Sabun lantai. Harga lebih murah sebab barang tak bercampur!</p>
             </div>
+            <p id="d-price" class="font-bold"></p>
+            <p id="d-profit" class="text-green-400 font-bold mb-6"></p>
+            <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-3 rounded-xl font-bold mb-4">📍 Navigasi Waze</a>
+            <button onclick="location.reload()" class="w-full opacity-50 underline">Kembali ke Menu</button>
         </div>
     </div>
-
     <script>
-        function selectService(name, min, max, desc) {
-            document.getElementById('service-list').classList.add('hidden');
-            document.getElementById('detail-page').classList.remove('hidden');
-            document.getElementById('service-title').innerText = name;
-            document.getElementById('price-range').innerText = "Harga: RM" + min + " - RM" + max;
-            document.getElementById('profit-calc').innerText = "Anggaran Profit Projek: RM" + (min * 0.7).toFixed(0) + " - RM" + (max * 0.7).toFixed(0);
+        function showDetail(name, min, max) {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('detail-view').classList.remove('hidden');
+            document.getElementById('d-title').innerText = name;
+            document.getElementById('d-price').innerText = "Anggaran Harga: RM" + min + " - RM" + max;
+            document.getElementById('d-profit').innerText = "Anggaran Profit: RM" + (min*0.7).toFixed(0) + " - RM" + (max*0.7).toFixed(0);
         }
     </script>
 </body>
