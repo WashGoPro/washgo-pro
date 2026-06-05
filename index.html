@@ -2,86 +2,75 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WashGo Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { 
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000');
-            background-size: cover; background-position: center; min-height: 100vh;
-        }
-        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        body { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000'); background-size: cover; min-height: 100vh; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
     </style>
 </head>
-<body class="p-4 md:p-10 text-white">
+<body class="p-6">
 
-    <h1 class="text-4xl font-black text-center mb-8 text-blue-400">WASHGO PRO</h1>
+<h1 class="text-3xl font-bold text-center mb-8 text-blue-400">WASHGO PRO</h1>
 
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-6">
-        
-        <div class="md:w-1/2 space-y-4">
-            <div class="glass p-4 rounded-2xl flex items-center gap-4">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=200" class="w-20 h-20 rounded-xl object-cover">
-                <div><div class="font-bold text-lg">Basic Cleaning</div><div class="text-sm opacity-80">RM80 - RM120</div></div>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-4">
-                <img src="https://images.unsplash.com/photo-1581578751502-c639f660819f?w=200" class="w-20 h-20 rounded-xl object-cover">
-                <div><div class="font-bold text-lg">Deep Cleaning</div><div class="text-sm opacity-80">RM120 - RM180</div></div>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-4">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=200" class="w-20 h-20 rounded-xl object-cover">
-                <div><div class="font-bold text-lg">Move In / Move Out</div><div class="text-sm opacity-80">RM150 - RM250</div></div>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-4">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a268e?w=200" class="w-20 h-20 rounded-xl object-cover">
-                <div><div class="font-bold text-lg">Post Renovation</div><div class="text-sm opacity-80">RM250 - RM500</div></div>
-            </div>
+<div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-6">
+    <!-- Kiri: Senarai Servis -->
+    <div class="md:w-1/2 space-y-4" id="serviceList">
+        <div onclick="showForm('Basic Cleaning', 'RM80 - RM120')" class="glass p-4 rounded-xl cursor-pointer hover:bg-white/20 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=100" class="w-16 h-16 rounded-lg object-cover">
+            <div><div class="font-bold">Basic Cleaning</div><div>RM80 - RM120</div></div>
         </div>
-
-        <div class="md:w-1/2 glass p-6 rounded-3xl">
-            <h2 class="text-2xl font-bold text-blue-400 mb-1">Basic Cleaning</h2>
-            <p class="mb-4 font-semibold">Harga: RM80 - RM120</p>
-            
-            <div class="bg-green-900/60 p-4 rounded-xl text-xs mb-6 border border-green-500">
-                <p class="font-bold text-yellow-400 mb-1">Nota Penting:</p>
-                Demi menjaga tahap kebersihan (hygiene) yang paling tinggi, pihak kami hanya menyediakan tenaga kerja profesional sahaja. Pelanggan diminta untuk menyediakan:
-                <ul class="list-disc ml-4 my-2">
-                    <li>Peralatan Pembersihan: Mop, Vakum, dan Penyapu.</li>
-                    <li>Bahan Pencuci: Sabun pencuci lantai.</li>
-                </ul>
-                💡 Kelebihan Polisi Ini: Barang yang digunakan di rumah anda adalah eksklusif untuk rumah anda sahaja (tidak bercampur sisa rumah lain). Oleh itu, harga servis kami telah dilaraskan menjadi jauh lebih murah!
-            </div>
-
-            <form class="space-y-4">
-                <input type="text" placeholder="Customer Name" class="w-full p-3 rounded-xl bg-white/10 border border-white/20">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Name/Phone" class="p-3 rounded-xl bg-white/10 border border-white/20">
-                    <input type="time" class="p-3 rounded-xl bg-white/10 border border-white/20">
-                </div>
-                
-                <div class="flex gap-2">
-                    <button type="button" onclick="getLocation()" class="flex-1 bg-blue-600 p-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1">
-                        📍 Dapatkan Lokasi (GPS)
-                    </button>
-                    <input type="text" placeholder="Tampal Link Map Jika Ada" class="flex-1 p-3 rounded-xl bg-white/10 border border-white/20 text-xs">
-                </div>
-
-                <button type="submit" class="w-full bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-500 transition">Submit Tempahan</button>
-            </form>
-            <button onclick="location.reload()" class="w-full mt-4 opacity-50 underline text-sm">Kembali ke Menu</button>
+        <div onclick="showForm('Deep Cleaning', 'RM120 - RM180')" class="glass p-4 rounded-xl cursor-pointer hover:bg-white/20 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1581578751502-c639f660819f?w=100" class="w-16 h-16 rounded-lg object-cover">
+            <div><div class="font-bold">Deep Cleaning</div><div>RM120 - RM180</div></div>
+        </div>
+        <div onclick="showForm('Move In / Move Out', 'RM150 - RM250')" class="glass p-4 rounded-xl cursor-pointer hover:bg-white/20 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=100" class="w-16 h-16 rounded-lg object-cover">
+            <div><div class="font-bold">Move In / Move Out</div><div>RM150 - RM250</div></div>
+        </div>
+        <div onclick="showForm('Post Renovation', 'RM250 - RM500')" class="glass p-4 rounded-xl cursor-pointer hover:bg-white/20 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a268e?w=100" class="w-16 h-16 rounded-lg object-cover">
+            <div><div class="font-bold">Post Renovation</div><div>RM250 - RM500</div></div>
         </div>
     </div>
 
-    <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((pos) => {
-                    alert("Lokasi berjaya diambil!");
-                });
-            } else {
-                alert("GPS tidak disokong.");
-            }
+    <!-- Kanan: Borang (Disembunyikan Awalnya) -->
+    <div id="bookingForm" class="md:w-1/2 glass p-6 rounded-2xl hidden">
+        <h2 id="serviceTitle" class="text-xl font-bold text-blue-400"></h2>
+        <p id="servicePrice" class="mb-4"></p>
+        
+        <div class="bg-green-900/70 p-4 rounded-lg text-xs mb-4 border border-green-500">
+            <p class="font-bold text-yellow-400">Nota Penting:</p>
+            Demi menjaga tahap kebersihan, kami hanya menyediakan tenaga kerja profesional sahaja. Pelanggan diminta menyediakan peralatan mop, vakum, penyapu dan sabun pencuci lantai.
+        </div>
+
+        <form class="space-y-3">
+            <input type="text" placeholder="Customer Name" class="w-full p-2 rounded bg-black/20 border border-white/20">
+            <div class="flex gap-2">
+                <input type="text" placeholder="Phone" class="w-1/2 p-2 rounded bg-black/20 border border-white/20">
+                <input type="time" class="w-1/2 p-2 rounded bg-black/20 border border-white/20">
+            </div>
+            <button type="button" onclick="getLocation()" class="w-full bg-blue-600 p-2 rounded text-xs">📍 Dapatkan Lokasi (GPS)</button>
+            <input type="text" id="lokasi" placeholder="Tampal Link Map" class="w-full p-2 rounded bg-black/20 border border-white/20">
+            <button class="w-full bg-blue-700 py-2 rounded font-bold">Submit Tempahan</button>
+        </form>
+        <button onclick="location.reload()" class="w-full mt-4 text-sm underline opacity-60">Kembali ke Menu</button>
+    </div>
+</div>
+
+<script>
+    function showForm(title, price) {
+        document.getElementById('serviceList').classList.add('hidden'); // Sembunyi senarai
+        document.getElementById('bookingForm').classList.remove('hidden'); // Tunjuk borang
+        document.getElementById('serviceTitle').innerText = title;
+        document.getElementById('servicePrice').innerText = "Harga: " + price;
+    }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                document.getElementById("lokasi").value = pos.coords.latitude + ", " + pos.coords.longitude;
+            });
         }
-    </script>
+    }
+</script>
 </body>
 </html>
