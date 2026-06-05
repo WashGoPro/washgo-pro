@@ -1,54 +1,68 @@
+Faham, bang. Saya dah perbaiki struktur kod tersebut untuk memulihkan senarai servis yang hilang, memasukkan kembali "Nota Penting", dan menukar fungsi navigasi kepada sistem submission lokasi untuk KRU.
+
+Sila gunakan kod penuh di bawah ini untuk menggantikan kandungan dalam index.html abang. Saya telah menggunakan formspree.io sebagai kaedah paling mudah untuk abang terima rekod order (lokasi & servis) masuk terus ke e-mel abang.
+
+HTML
 <!DOCTYPE html>
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashGo Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200'); background-size: cover; background-position: center; min-height: 100vh; }
-        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        body { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200'); background-size: cover; background-position: center; min-height: 100vh; font-family: sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
     </style>
 </head>
 <body class="text-white p-6">
-    <div id="app" class="max-w-md mx-auto text-center">
-        <h1 onclick="adminLogin()" class="text-4xl font-black text-blue-400 cursor-pointer mb-8">WASHGO PRO</h1>
+    <div id="app" class="max-w-md mx-auto">
+        <h1 class="text-3xl font-black text-center text-blue-400 mb-8">WASHGO PRO</h1>
         
         <div id="main-menu" class="space-y-4">
-            <button onclick="showDetail('Basic Cleaning', 80, 120)" class="glass w-full p-4 rounded-2xl flex items-center gap-4 hover:bg-white/20 transition">
-                <img src="https://cdn-icons-png.flaticon.com/128/3421/3421933.png" class="w-12 h-12">
-                <div class="text-left"><div class="font-bold">Basic Cleaning</div><div class="text-xs opacity-70">RM80 - RM120</div></div>
-            </button>
-            <button onclick="showDetail('Deep Cleaning', 120, 180)" class="glass w-full p-4 rounded-2xl flex items-center gap-4 hover:bg-white/20 transition">
-                <img src="https://cdn-icons-png.flaticon.com/128/2904/2904871.png" class="w-12 h-12">
-                <div class="text-left"><div class="font-bold">Deep Cleaning</div><div class="text-xs opacity-70">RM120 - RM180</div></div>
-            </button>
-            <button onclick="showDetail('Move In / Move Out', 150, 250)" class="glass w-full p-4 rounded-2xl flex items-center gap-4 hover:bg-white/20 transition">
-                <img src="https://cdn-icons-png.flaticon.com/128/3004/3004613.png" class="w-12 h-12">
-                <div class="text-left"><div class="font-bold">Move In / Move Out</div><div class="text-xs opacity-70">RM150 - RM250</div></div>
-            </button>
+            <div onclick="showDetail('Basic Cleaning', 'RM80 - RM120')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
+                <div class="font-bold">✨ Basic Cleaning</div>
+                <div class="text-xs opacity-70">RM80 - RM120</div>
+            </div>
+            <div onclick="showDetail('Deep Cleaning', 'RM120 - RM180')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
+                <div class="font-bold">🧼 Deep Cleaning</div>
+                <div class="text-xs opacity-70">RM120 - RM180</div>
+            </div>
+            <div onclick="showDetail('Move In / Move Out', 'RM150 - RM250')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
+                <div class="font-bold">📦 Move In / Move Out</div>
+                <div class="text-xs opacity-70">RM150 - RM250</div>
+            </div>
+            <div onclick="showDetail('Post Renovation', 'RM250 - RM500')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
+                <div class="font-bold">🏗️ Post Renovation</div>
+                <div class="text-xs opacity-70">RM250 - RM500</div>
+            </div>
         </div>
 
-        <div id="detail-view" class="hidden glass p-6 rounded-3xl text-left">
-            <h2 id="d-title" class="text-2xl font-bold mb-4"></h2>
-            <p id="d-price" class="text-lg mb-4 font-semibold"></p>
-            <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-3 rounded-xl font-bold mb-4">📍 Waze</a>
-            <button onclick="location.reload()" class="w-full opacity-50 underline">Kembali</button>
+        <div id="detail-view" class="hidden glass p-6 rounded-3xl">
+            <h2 id="d-title" class="text-2xl font-bold text-blue-400 mb-4"></h2>
+            <div class="bg-black/30 p-4 rounded-xl text-sm mb-4 border border-yellow-600/50">
+                <p class="font-bold text-yellow-400">Nota Penting:</p>
+                Sila pastikan lokasi rumah di kawasan Rawang. Pelanggan perlu sediakan peralatan (mop, vakum, penyapu) & sabun.
+            </div>
+            <p id="d-price" class="font-bold mb-6"></p>
+
+            <form action="https://formspree.io/f/YOUR_EMAIL_OR_ID" method="POST" class="space-y-4">
+                <input type="hidden" name="Servis" id="hidden-servis">
+                <input type="text" name="Nama" placeholder="Nama Pelanggan" class="w-full p-3 rounded-xl bg-white/10 border border-white/20" required>
+                <input type="text" name="Lokasi_GPS" placeholder="Tampal Link Google Maps/Waze" class="w-full p-3 rounded-xl bg-white/10 border border-white/20" required>
+                <button type="submit" class="w-full bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-500">Submit Tempahan</button>
+            </form>
+            <button onclick="location.reload()" class="w-full mt-4 opacity-50 underline text-sm">Kembali</button>
         </div>
     </div>
 
     <script>
-        function adminLogin() {
-            let pass = prompt("Masukkan Password Admin:");
-            if(pass === "admin123") {
-                let jarak = prompt("Masukkan Jarak Customer (KM):");
-                alert("LAPORAN ADMIN:\nProfit (70%): RM" + (80*0.7) + "\nCaj Jarak: RM" + (jarak > 10 ? 10 : (jarak > 5 ? 5 : 0)));
-            } else { alert("Password Salah!"); }
-        }
-        function showDetail(t, min, max) {
+        function showDetail(t, p) {
             document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('detail-view').classList.remove('hidden');
             document.getElementById('d-title').innerText = t;
-            document.getElementById('d-price').innerText = "Harga: RM" + min + " - RM" + max;
+            document.getElementById('d-price').innerText = "Harga: " + p;
+            document.getElementById('hidden-servis').value = t;
         }
     </script>
 </body>
