@@ -1,8 +1,3 @@
-Faham, bang. Saya dah perbaiki struktur kod tersebut untuk memulihkan senarai servis yang hilang, memasukkan kembali "Nota Penting", dan menukar fungsi navigasi kepada sistem submission lokasi untuk KRU.
-
-Sila gunakan kod penuh di bawah ini untuk menggantikan kandungan dalam index.html abang. Saya telah menggunakan formspree.io sebagai kaedah paling mudah untuk abang terima rekod order (lokasi & servis) masuk terus ke e-mel abang.
-
-HTML
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -11,58 +6,124 @@ HTML
     <title>WashGo Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200'); background-size: cover; background-position: center; min-height: 100vh; font-family: sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        /* Gaya Latar Belakang Foto Profesional */
+        body { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000');
+            background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;
+            font-family: sans-serif;
+        }
+        /* Gaya 'Glassmorphism' */
+        .glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; }
+        .glass-input { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; }
+        .glass-input::placeholder { color: rgba(255, 255, 255, 0.7); }
     </style>
 </head>
-<body class="text-white p-6">
-    <div id="app" class="max-w-md mx-auto">
-        <h1 class="text-3xl font-black text-center text-blue-400 mb-8">WASHGO PRO</h1>
+<body class="p-4 md:p-10 flex items-center justify-center">
+    <div id="app" class="w-full max-w-lg">
         
-        <div id="main-menu" class="space-y-4">
-            <div onclick="showDetail('Basic Cleaning', 'RM80 - RM120')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
-                <div class="font-bold">✨ Basic Cleaning</div>
-                <div class="text-xs opacity-70">RM80 - RM120</div>
-            </div>
-            <div onclick="showDetail('Deep Cleaning', 'RM120 - RM180')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
-                <div class="font-bold">🧼 Deep Cleaning</div>
-                <div class="text-xs opacity-70">RM120 - RM180</div>
-            </div>
-            <div onclick="showDetail('Move In / Move Out', 'RM150 - RM250')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
-                <div class="font-bold">📦 Move In / Move Out</div>
-                <div class="text-xs opacity-70">RM150 - RM250</div>
-            </div>
-            <div onclick="showDetail('Post Renovation', 'RM250 - RM500')" class="glass p-4 rounded-2xl cursor-pointer hover:bg-white/20">
-                <div class="font-bold">🏗️ Post Renovation</div>
-                <div class="text-xs opacity-70">RM250 - RM500</div>
-            </div>
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-extrabold text-blue-400 tracking-tight">WASHGO PRO</h1>
         </div>
 
-        <div id="detail-view" class="hidden glass p-6 rounded-3xl">
-            <h2 id="d-title" class="text-2xl font-bold text-blue-400 mb-4"></h2>
-            <div class="bg-black/30 p-4 rounded-xl text-sm mb-4 border border-yellow-600/50">
-                <p class="font-bold text-yellow-400">Nota Penting:</p>
-                Sila pastikan lokasi rumah di kawasan Rawang. Pelanggan perlu sediakan peralatan (mop, vakum, penyapu) & sabun.
-            </div>
-            <p id="d-price" class="font-bold mb-6"></p>
+        <div id="service-list" class="space-y-6">
+            <h2 class="text-xl font-semibold text-center mb-6">Pilih Servis Anda:</h2>
+            <button onclick="selectService('Basic Cleaning', 'RM80 - RM120')" class="glass-card w-full p-6 rounded-2xl flex items-center gap-6 hover:bg-white/20 transition duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/128/3063/3063186.png" class="w-16 h-16 rounded-xl" alt="Basic icon">
+                <div class="text-left"><div class="font-bold text-xl mb-1">Basic Cleaning</div><div class="text-sm opacity-80">RM80 - RM120</div></div>
+            </button>
+            <button onclick="selectService('Deep Cleaning', 'RM120 - RM180')" class="glass-card w-full p-6 rounded-2xl flex items-center gap-6 hover:bg-white/20 transition duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/128/2917/2917992.png" class="w-16 h-16 rounded-xl" alt="Deep icon">
+                <div class="text-left"><div class="font-bold text-xl mb-1">Deep Cleaning</div><div class="text-sm opacity-80">RM120 - RM180</div></div>
+            </button>
+            <button onclick="selectService('Move In / Move Out', 'RM150 - RM250')" class="glass-card w-full p-6 rounded-2xl flex items-center gap-6 hover:bg-white/20 transition duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/128/3062/3062934.png" class="w-16 h-16 rounded-xl" alt="Move icon">
+                <div class="text-left"><div class="font-bold text-xl mb-1">Move In / Move Out</div><div class="text-sm opacity-80">RM150 - RM250</div></div>
+            </button>
+            <button onclick="selectService('Post Renovation', 'RM250 - RM500')" class="glass-card w-full p-6 rounded-2xl flex items-center gap-6 hover:bg-white/20 transition duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/128/2750/2750785.png" class="w-16 h-16 rounded-xl" alt="Post icon">
+                <div class="text-left"><div class="font-bold text-xl mb-1">Post Renovation</div><div class="text-sm opacity-80">RM250 - RM500</div></div>
+            </button>
+        </div>
 
-            <form action="https://formspree.io/f/YOUR_EMAIL_OR_ID" method="POST" class="space-y-4">
-                <input type="hidden" name="Servis" id="hidden-servis">
-                <input type="text" name="Nama" placeholder="Nama Pelanggan" class="w-full p-3 rounded-xl bg-white/10 border border-white/20" required>
-                <input type="text" name="Lokasi_GPS" placeholder="Tampal Link Google Maps/Waze" class="w-full p-3 rounded-xl bg-white/10 border border-white/20" required>
-                <button type="submit" class="w-full bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-500">Submit Tempahan</button>
-            </form>
-            <button onclick="location.reload()" class="w-full mt-4 opacity-50 underline text-sm">Kembali</button>
+        <div id="detail-page" class="hidden">
+            <div class="glass-card p-8 md:p-10 rounded-3xl">
+                <div class="flex items-center gap-4 mb-6">
+                    <img id="detail-icon" src="" class="w-16 h-16 rounded-xl hidden" alt="icon">
+                    <h2 id="service-title" class="text-3xl font-bold text-blue-400"></h2>
+                </div>
+
+                <div class="bg-black/30 p-6 rounded-xl mb-8 border border-yellow-600/50">
+                    <p class="font-bold text-yellow-400 text-lg mb-2">💡 Nota Penting (Sila Ambil Perhatian):</p>
+                    <p class="text-sm opacity-90 leading-relaxed">
+                        Demi menjaga tahap kebersihan (hygiene) yang paling tinggi, pihak kami hanya menyediakan tenaga kerja profesional sahaja. Pelanggan diminta untuk menyediakan: Peralatan Pembersihan: Mop, Vakum, dan Penyapu. Bahan Pencuci: Sabun pencuci lantai.<br>
+                        <strong>Kelebihan Polisi Ini:</strong> Barang yang digunakan di rumah anda adalah eksklusif untuk rumah anda sahaja (tidak bercampur sisa rumah lain). Oleh itu, harga servis kami telah dilaraskan menjadi jauh lebih murah!
+                    </p>
+                </div>
+
+                <form class="space-y-6">
+                    <div><input type="text" id="cust-name" placeholder="Nama Pelanggan" class="glass-input w-full p-4 rounded-xl" required></div>
+                    <div><input type="text" id="cust-phone" placeholder="No. Telefon" class="glass-input w-full p-4 rounded-xl" required></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="date" id="cust-date" class="glass-input w-full p-4 rounded-xl" required>
+                        <input type="time" id="cust-time" class="glass-input w-full p-4 rounded-xl" required>
+                    </div>
+
+                    <div class="flex items-center gap-4 border border-white/20 p-4 rounded-xl">
+                        <button type="button" onclick="getLocationGPS()" class="glass-card flex items-center gap-3 p-4 rounded-xl hover:bg-white/20 transition text-sm">
+                            <img src="https://cdn-icons-png.flaticon.com/128/2991/2991195.png" class="w-6 h-6" alt="GPS icon">
+                            <span>Dapatkan Lokasi (GPS)</span>
+                        </button>
+                        <input type="text" id="cust-map-link" placeholder="Optional: Tampal Link Map Jika Ada" class="glass-input flex-1 p-4 rounded-xl text-sm">
+                        <span id="gps-status" class="text-xs text-green-400 hidden">Lokasi Diambil</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 p-5 rounded-2xl font-bold text-xl hover:bg-blue-500 transition duration-300">Submit Tempahan</button>
+                </form>
+
+                <button onclick="location.reload()" class="w-full mt-6 opacity-60 underline text-sm">Kembali ke Menu</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function showDetail(t, p) {
-            document.getElementById('main-menu').classList.add('hidden');
-            document.getElementById('detail-view').classList.remove('hidden');
-            document.getElementById('d-title').innerText = t;
-            document.getElementById('d-price').innerText = "Harga: " + p;
-            document.getElementById('hidden-servis').value = t;
+        // Data ikon servis
+        const serviceIcons = {
+            'Basic Cleaning': 'https://cdn-icons-png.flaticon.com/128/3063/3063186.png',
+            'Deep Cleaning': 'https://cdn-icons-png.flaticon.com/128/2917/2917992.png',
+            'Move In / Move Out': 'https://cdn-icons-png.flaticon.com/128/3062/3062934.png',
+            'Post Renovation': 'https://cdn-icons-png.flaticon.com/128/2750/2750785.png'
+        };
+
+        function selectService(name, priceRange) {
+            document.getElementById('service-list').classList.add('hidden');
+            document.getElementById('detail-page').classList.remove('hidden');
+            document.getElementById('service-title').innerText = name;
+
+            const iconEl = document.getElementById('detail-icon');
+            if (serviceIcons[name]) {
+                iconEl.src = serviceIcons[name];
+                iconEl.classList.remove('hidden');
+            } else {
+                iconEl.classList.add('hidden');
+            }
+        }
+
+        function getLocationGPS() {
+            const statusEl = document.getElementById('gps-status');
+            const linkInput = document.getElementById('cust-map-link');
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    linkInput.value = `https://www.google.com/maps/@${latitude},${longitude},15z`;
+                    statusEl.classList.remove('hidden');
+                }, error => {
+                    alert("Gagal mendapatkan lokasi. Sila semak tetapan GPS atau tampal pautan map.");
+                    console.error(error);
+                });
+            } else {
+                alert("Geolocation tidak disokong oleh browser anda.");
+            }
         }
     </script>
 </body>
