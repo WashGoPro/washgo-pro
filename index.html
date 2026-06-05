@@ -3,109 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WashGo Pro - Cuci Rumah Rawang</title>
+    <title>WashGo Pro - Servis Pembersihan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { 
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            font-family: 'Segoe UI', sans-serif; 
-        }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1.5rem; 
-            color: white;
-        }
-        .page { display: none; }
-        #page-katalog { display: block; }
+        .glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; }
     </style>
 </head>
-<body class="pb-20 text-white">
-
-<div id="app" class="max-w-md mx-auto p-4 pt-10">
-    <!-- Header -->
-    <div id="admin-trigger" onclick="handleAdminTrigger()" class="bg-blue-600 p-6 rounded-3xl text-center shadow-2xl mb-6 border-b-4 border-yellow-500 cursor-pointer">
-        <h1 class="text-2xl font-black uppercase tracking-wider text-yellow-300">WASHGO PRO</h1>
-        <p class="text-white text-sm opacity-90">Pakar Cuci Rumah Rawang</p>
-    </div>
-
-    <!-- Halaman Katalog -->
-    <div id="page-katalog" class="page">
-        <!-- Nota Penting -->
-        <div class="bg-yellow-500/20 border-l-4 border-yellow-500 p-4 rounded-xl mb-6 text-sm">
-            <h2 class="font-bold text-yellow-300 mb-1">Nota Penting:</h2>
-            <p class="opacity-90">Sila pastikan lokasi rumah di kawasan Rawang untuk servis segera. Hubungi kami jika perlukan bantuan.</p>
+<body class="bg-slate-900 text-white p-4">
+    <div id="app" class="max-w-md mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-400">WASHGO PRO</h1>
+            <p class="text-sm opacity-80">Pakar Cuci Rumah Rawang</p>
         </div>
 
-        <h2 class="text-lg font-bold mb-4 px-2">Pilih Servis</h2>
-        <div class="grid grid-cols-1 gap-4">
-            <div onclick="showPage('tempah')" class="glass-card flex items-center p-4 cursor-pointer hover:bg-white/20 transition-all">
-                <div class="w-10 h-10 bg-blue-500/50 rounded-xl flex items-center justify-center font-bold">1</div>
-                <div class="ml-4">
-                    <div class="font-bold">Basic Cleaning</div>
-                    <div class="text-xs text-blue-200">RM 80 - Cuci ruang tamu</div>
+        <!-- Senarai Servis -->
+        <div id="service-list" class="space-y-4">
+            <button onclick="selectService('Basic Cleaning', 80, 120, 'Cucian asas untuk penyelenggaraan rutin')" class="glass-card w-full p-4 rounded-xl text-left">
+                <h2 class="font-bold">✨ Basic Cleaning</h2>
+                <p class="text-xs opacity-70">Bermula RM80 - RM120</p>
+            </button>
+            <button onclick="selectService('Deep Cleaning', 120, 180, 'Pembersihan menyeluruh & kotoran degil')" class="glass-card w-full p-4 rounded-xl text-left">
+                <h2 class="font-bold">🧼 Deep Cleaning</h2>
+                <p class="text-xs opacity-70">Bermula RM120 - RM180</p>
+            </button>
+            <button onclick="selectService('Move In/Out', 150, 250, 'Cucian intensif rumah baru/keluar')" class="glass-card w-full p-4 rounded-xl text-left">
+                <h2 class="font-bold">📦 Move In / Move Out</h2>
+                <p class="text-xs opacity-70">Bermula RM150 - RM250</p>
+            </button>
+            <button onclick="selectService('Post Renovation', 250, 500, 'Cuci habuk, simen & sisa binaan')" class="glass-card w-full p-4 rounded-xl text-left">
+                <h2 class="font-bold">🏗️ Post Renovation</h2>
+                <p class="text-xs opacity-70">Bermula RM250 - RM500</p>
+            </button>
+        </div>
+
+        <!-- Halaman Butiran Servis (Disembunyikan asal) -->
+        <div id="detail-page" class="hidden">
+            <div class="glass-card p-6 rounded-xl">
+                <h2 id="service-title" class="text-xl font-bold mb-4"></h2>
+                <div class="bg-yellow-900/30 p-4 rounded-lg mb-4 text-sm">
+                    <p class="font-bold text-yellow-500 mb-2">💡 Nota Penting:</p>
+                    <p>Pihak kami menyediakan tenaga kerja sahaja. Pelanggan perlu sediakan: Mop, Vakum, Penyapu & Sabun lantai.</p>
+                    <p class="mt-2 text-xs opacity-80 italic">Harga kami lebih murah kerana barang tidak bercampur!</p>
                 </div>
+                <p id="price-range" class="mb-4 font-semibold"></p>
+                <a href="https://waze.com/ul" class="block bg-blue-600 text-center py-2 rounded-lg mb-4">📍 Navigasi Waze</a>
+                <button onclick="location.reload()" class="w-full text-sm opacity-50 underline">Kembali</button>
             </div>
-            <div onclick="showPage('tempah')" class="glass-card flex items-center p-4 cursor-pointer hover:bg-white/20 transition-all">
-                <div class="w-10 h-10 bg-blue-500/50 rounded-xl flex items-center justify-center font-bold">2</div>
-                <div class="ml-4">
-                    <div class="font-bold">Deep Cleaning</div>
-                    <div class="text-xs text-blue-200">RM 120 - Seluruh Rumah</div>
-                </div>
-            </div>
-            <!-- Waze / Maps Link -->
-            <a href="https://waze.com/ul" target="_blank" class="glass-card flex items-center p-4 cursor-pointer hover:bg-blue-600/50 transition-all">
-                <div class="w-10 h-10 bg-green-500/50 rounded-xl flex items-center justify-center font-bold">📍</div>
-                <div class="ml-4">
-                    <div class="font-bold">Waze ke Pejabat</div>
-                    <div class="text-xs text-green-200">Klik untuk navigasi</div>
-                </div>
-            </a>
         </div>
     </div>
 
-    <!-- Halaman Tempahan -->
-    <div id="page-tempah" class="page">
-        <div class="glass-card p-6">
-            <h2 class="text-xl font-bold mb-4">Butiran Tempahan</h2>
-            <input type="text" placeholder="Nama Penuh" class="w-full p-3 mb-3 bg-white/10 rounded-xl text-white placeholder-white/50 outline-none border border-white/20">
-            <button onclick="showPage('katalog')" class="w-full bg-yellow-500 text-blue-900 py-3 rounded-xl font-bold">Hantar Tempahan</button>
-            <button onclick="showPage('katalog')" class="w-full mt-3 text-white/50 text-sm hover:text-white underline">Kembali</button>
-        </div>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="page-admin" class="page">
-        <h2 class="text-xl font-bold mb-4">Admin Dashboard</h2>
-        <div class="glass-card p-4 mb-4">
-            <p>Selamat datang bos! Data tempahan sedang dikemaskini.</p>
-        </div>
-        <button onclick="showPage('katalog')" class="w-full py-3 bg-white/20 rounded-xl text-white">Kembali ke Home</button>
-    </div>
-</div>
-
-<script>
-    const ADMIN_PASS = "123456";
-    let clickCount = 0;
-    function handleAdminTrigger() {
-        clickCount++;
-        if (clickCount === 3) {
-            const input = prompt("Masukkan Password Admin:");
-            if (input === ADMIN_PASS) { showPage('admin'); }
-            clickCount = 0;
+    <script>
+        function selectService(name, min, max, desc) {
+            document.getElementById('service-list').classList.add('hidden');
+            document.getElementById('detail-page').classList.remove('hidden');
+            document.getElementById('service-title').innerText = name;
+            document.getElementById('price-range').innerText = "Anggaran Harga: RM" + min + " - RM" + max;
+            
+            // Formula Profit (Contoh: 70% dari harga adalah profit kasar)
+            let profitMin = (min * 0.7).toFixed(2);
+            let profitMax = (max * 0.7).toFixed(2);
+            console.log("Anggaran Profit Projek: RM" + profitMin + " - RM" + profitMax);
         }
-        setTimeout(() => { clickCount = 0; }, 2000);
-    }
-    function showPage(page) {
-        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        document.getElementById('page-' + page).style.display = 'block';
-    }
-</script>
+    </script>
 </body>
 </html>
